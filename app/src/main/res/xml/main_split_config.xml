@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:window="http://schemas.android.com/apk/res-auto">
+
+    <!-- Define a split for MainActivity and any placeholder secondary activity if we had one.
+         For this test app, since we are using a FragmentContainer within MainActivity, Activity Embedding
+         is more of a demonstration configuration. Here we define a generic rule. -->
+    <SplitPairRule
+        window:clearTop="false"
+        window:finishPrimaryWithSecondary="never"
+        window:finishSecondaryWithPrimary="always"
+        window:splitLayoutDirection="locale"
+        window:splitRatio="0.3">
+        <SplitPairFilter
+            window:primaryActivityName="com.example.aaosmaptest.MainActivity"
+            window:secondaryActivityName="*" />
+    </SplitPairRule>
+
+    <!-- Fallback ActivityRule for the MainActivity itself to ensure it takes full window if needed -->
+    <ActivityRule
+        window:alwaysExpand="true">
+        <ActivityFilter
+            window:activityName="com.example.aaosmaptest.MainActivity" />
+    </ActivityRule>
+
+</resources>
