@@ -31,6 +31,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/driving_state_toggle"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:background="#bdbdbd"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/locations_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/btnSanFrancisco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/loc_san_francisco"/>
+
+        <Button
+            android:id="@+id/btnNewYork"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/loc_new_york"/>
+
+        <Button
+            android:id="@+id/btnLondon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/loc_london"/>
+
+        <Button
+            android:id="@+id/btnTokyo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/loc_tokyo"/>
+
     </LinearLayout>
 
     <!-- Main Content Area representing the Map Container -->

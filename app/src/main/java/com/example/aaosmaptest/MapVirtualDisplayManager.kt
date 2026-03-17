@@ -57,6 +57,26 @@ class MapVirtualDisplayManager(private val context: Context) {
         }
     }
 
+    fun updateMapLocation(intent: Intent) {
+        val displayId = getDisplayId()
+        if (displayId != null && displayId != android.view.Display.INVALID_DISPLAY) {
+            try {
+                // Ensure the intent is strictly targeted at our Map Activity
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.LimitedMapsActivity")
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+                
+                // Instruct the system to push this updated Intent directly to the target Virtual Display
+                val options = ActivityOptions.makeBasic().apply {
+                    launchDisplayId = displayId
+                }
+                context.startActivity(intent, options.toBundle())
+                Log.d("MapVirtualDisplayManager", "Updated map location on display ID $displayId")
+            } catch (e: Exception) {
+                 Log.e("MapVirtualDisplayManager", "Failed to update map location", e)
+            }
+        }
+    }
+
     fun getDisplayId(): Int? {
         return virtualDisplay?.display?.displayId
     }

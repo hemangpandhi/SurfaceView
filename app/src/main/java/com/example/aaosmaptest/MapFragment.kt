@@ -90,6 +90,10 @@ class MapFragment : Fragment() {
         isDrivingState = driving
     }
 
+    fun updateMapLocation(intent: android.content.Intent) {
+        virtualDisplayManager?.updateMapLocation(intent)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

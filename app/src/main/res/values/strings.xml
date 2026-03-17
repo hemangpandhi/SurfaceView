@@ -3,4 +3,9 @@
     <string name="driving_state_toggle">Driving State (Limited Interactivity)</string>
     <string name="map_placeholder">Map Rendering Area (Virtual Display)</string>
     <string name="sidebar_title">Controls</string>
+    <string name="locations_title">Locations</string>
+    <string name="loc_san_francisco">San Francisco</string>
+    <string name="loc_new_york">New York City</string>
+    <string name="loc_london">London</string>
+    <string name="loc_tokyo">Tokyo</string>
 </resources>
