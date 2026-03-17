@@ -6,6 +6,14 @@
     <uses-feature
         android:name="android.hardware.type.automotive"
         android:required="true" />
+        
+    <!-- Permissions to launch other activities on secondary displays -->
+    <uses-permission android:name="android.permission.INJECT_EVENTS"/>
+    <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW"/>
+    <uses-permission android:name="android.permission.ACTIVITY_EMBEDDING"/>
+    <uses-permission android:name="android.permission.MANAGE_ACTIVITY_TASKS" />
+    <uses-permission android:name="android.permission.START_TASKS_FROM_RECENTS" />
+    <uses-permission android:name="android.permission.START_ANY_ACTIVITY" />
 
     <application
         android:allowBackup="true"
