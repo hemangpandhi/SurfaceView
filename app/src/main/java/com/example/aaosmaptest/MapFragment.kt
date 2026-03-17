@@ -59,7 +59,20 @@ class MapFragment : Fragment() {
             if (isDrivingState) {
                 true 
             } else {
-                false
+                virtualDisplayManager?.getDisplayId()?.let { displayId ->
+                    if (displayId != android.view.Display.INVALID_DISPLAY) {
+                        val setDisplayIdMethod = android.view.MotionEvent::class.java.getMethod("setDisplayId", Int::class.java)
+                        setDisplayIdMethod.invoke(event, displayId)
+                        try {
+                            val inputManager = requireContext().getSystemService(android.content.Context.INPUT_SERVICE) as android.hardware.input.InputManager
+                            val injectMethod = android.hardware.input.InputManager::class.java.getMethod("injectInputEvent", android.view.InputEvent::class.java, Int::class.java)
+                            injectMethod.invoke(inputManager, event, 0) // INJECT_INPUT_EVENT_MODE_ASYNC
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+                true
             }
         }
     }

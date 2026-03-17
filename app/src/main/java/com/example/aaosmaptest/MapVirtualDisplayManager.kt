@@ -26,7 +26,10 @@ class MapVirtualDisplayManager(private val context: Context) {
             height,
             densityDpi,
             surface,
-            DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC or DisplayManager.VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY
+            DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC or 
+            DisplayManager.VIRTUAL_DISPLAY_FLAG_PRESENTATION or 
+            DisplayManager.VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY or
+            256 // VIRTUAL_DISPLAY_FLAG_DESTROY_CONTENT_ON_REMOVAL (hidden public flag)
         )
         
         virtualDisplay?.display?.let { display ->
@@ -36,10 +39,10 @@ class MapVirtualDisplayManager(private val context: Context) {
 
     private fun launchActualGasMapActivity(displayId: Int) {
         try {
-            // Intent to launch the default map application (Actual Google Maps from AAOS GAS bundle)
-            val intent = Intent(Intent.ACTION_MAIN).apply {
-                addCategory(Intent.CATEGORY_APP_MAPS)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+            // Target the specific LimitedMapsActivity from Google Maps
+            val intent = Intent().apply {
+                setClassName("com.google.android.apps.maps", "com.google.android.maps.LimitedMapsActivity")
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
             }
 
             // Setting the target display ID to push the GAS map onto the SurfaceView
@@ -52,6 +55,10 @@ class MapVirtualDisplayManager(private val context: Context) {
         } catch (e: Exception) {
             Log.e("MapVirtualDisplayManager", "Failed to launch Actual GAS Maps Activity on Virtual Display", e)
         }
+    }
+
+    fun getDisplayId(): Int? {
+        return virtualDisplay?.display?.displayId
     }
 
     fun onSurfaceChanged(width: Int, height: Int) {
