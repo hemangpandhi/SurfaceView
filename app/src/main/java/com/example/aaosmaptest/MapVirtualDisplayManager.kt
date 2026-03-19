@@ -40,7 +40,7 @@ class MapVirtualDisplayManager(private val context: Context) {
     private fun launchActualGasMapActivity(displayId: Int) {
         try {
             // Target the specific EmbeddedClusterActivity from Google Maps for isolated secondary displays
-            val intent = Intent().apply {
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse("geo:0,0?t=m")).apply {
                 setClassName("com.google.android.apps.maps", "com.google.android.apps.gmm.car.embedded.auxiliarymap.EmbeddedClusterActivity")
                 addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
             }
