@@ -39,10 +39,10 @@ class MapVirtualDisplayManager(private val context: Context) {
 
     private fun launchActualGasMapActivity(displayId: Int) {
         try {
-            // Target the specific LimitedMapsActivity from Google Maps
+            // Target the specific EmbeddedClusterActivity from Google Maps for isolated secondary displays
             val intent = Intent().apply {
-                setClassName("com.google.android.apps.maps", "com.google.android.maps.LimitedMapsActivity")
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+                setClassName("com.google.android.apps.maps", "com.google.android.apps.gmm.car.embedded.auxiliarymap.EmbeddedClusterActivity")
+                addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
             }
 
             // Setting the target display ID to push the GAS map onto the SurfaceView
@@ -62,8 +62,8 @@ class MapVirtualDisplayManager(private val context: Context) {
         if (displayId != null && displayId != android.view.Display.INVALID_DISPLAY) {
             try {
                 // Ensure the intent is strictly targeted at our Map Activity
-                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.LimitedMapsActivity")
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.apps.gmm.car.embedded.auxiliarymap.EmbeddedClusterActivity")
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
                 
                 // Instruct the system to push this updated Intent directly to the target Virtual Display
                 val options = ActivityOptions.makeBasic().apply {
